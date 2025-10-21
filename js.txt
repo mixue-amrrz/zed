@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Interactive Tabs</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #000, #1c1c1c);
+      color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      background: #121212;
+      width: 90%;
+      max-width: 800px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      background: #1f1f1f;
+      border-bottom: 2px solid #2c2c2c;
+    }
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #aaa;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+    }
+
+    .tab:hover {
+      background: #2c2c2c;
+      color: #fff;
+    }
+
+    .tab.active {
+      background: #121212;
+      color: #fff;
+      border-bottom: 3px solid #fff;
+    }
+
+    .content {
+      position: relative;
+      height: 350px;
+      overflow: hidden;
+    }
+
+    .tab-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .tab-content.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: #2c2c2c;
+      border: 4px solid #fff;
+      margin: 0 auto 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #888;
+      transition: all 0.4s ease;
+      box-shadow: 0 5px 15px rgba(255,255,255,0.05);
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.05) rotate(3deg);
+      border-color: #aaa;
+      background: #1a1a1a;
+      color: #fff;
+    }
+	.profile-pic img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 25px;
+    }
+
+    .social-icons a {
+      text-decoration: none;
+      color: #fff;
+      background: #2c2c2c;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 10px rgba(255,255,255,0.05);
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.15) rotate(8deg);
+      background: #fff;
+      color: #000;
+      box-shadow: 0 8px 20px rgba(255,255,255,0.2);
+    }
+
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="tabs">
+      <div class="tab active" data-tab="home">Home</div>
+      <div class="tab" data-tab="socials">Socials</div>
+    </div>
+
+    <div class="content">
+      <div class="tab-content active" id="home">
+        <div class="profile-pic"><img src="img3.jpg" alt="My Photo"></div>
+        <h1>Hi, I am Zed! 🏠</h1>
+        <p>This is where you can find my socials.</p>
+      </div>
+
+      <div class="tab-content" id="socials">
+        <h1>Connect With Me 🌐</h1>
+        <div class="social-icons">
+      <a href="https://www.facebook.com/share/178rkFdNDB/?mibextid=wwXIfr" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook">Facebook</a>
+      <a href="https://www.instagram.com/z1ckk_k?igsh=MXFyd3RoeGgwbndzNQ%3D%3D&utm_source=qr" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram">Instagram</a>
+      <a href="https://www.tiktok.com/@z1ckk_k?_t=ZS-90eVkSbOCO2&_r=1" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/tiktok.png" alt="TikTok">TikTok</a>
+      <a href="https://x.com/zeddylovesu?s=21" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="X (Twitter)">X</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const target = tab.getAttribute('data-tab');
+        contents.forEach(content => {
+          content.classList.remove('active');
+          if (content.id === target) content.classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
